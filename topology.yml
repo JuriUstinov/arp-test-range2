@@ -1,4 +1,4 @@
-name: arp-test-range
+name: arp-test-range2
 hosts:
   - name: server
     base_box:
@@ -11,6 +11,13 @@ hosts:
       image: kali
       mgmt_user: debian
     flavor: m1.xlarge
+
+routers:
+  - name: home-router
+    base_box:
+      image: debian-12-x86_64
+      mgmt_user: debian
+    flavor: standard.small
 
 networks:
   - name: home-switch
@@ -25,6 +32,11 @@ net_mappings:
   - host: server
     network: home-switch
     ip: 10.10.30.6
+
+router_mappings:
+    - router: home-router
+      network: home-switch
+      ip: 10.10.30.1
 
 groups:
   - name: custom-group
